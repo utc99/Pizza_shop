@@ -1,0 +1,48 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+{% if user.is_superuser %}
+    {% if not orders %}
+        <div class="no_orders"> There are no orders.</div>
+    {% endif %}
+    
+    {% for item1 in orders %}
+        <li class="order_list">{{ item1.created_at|date:'Y.m.d H:i' }}. Order #{{item1.id}}. 
+            State: {{item1.state}}. Customer: {{item1.customer}}, {{item1.customer.email}}
+        </li>
+        <div class="order_list_details">
+            {% for item2 in item1.in_order.all %}
+                <li>{{item2.item }} <a class="my_orders_toppings"> {{item2.selected_toppings}} </a></li>
+            {% endfor %}
+        </div>
+    {% endfor %} 
+{% else %}
+    {% if not orders %}
+        <div class="no_orders"> You don't have any orders.</div>
+    {% endif %}
+    
+    {% for item1 in orders %}
+    
+        <li class="order_list">{{ item1.created_at|date:'Y.m.d H:m' }}. 
+            Order #{{item1.id}}. State: {{item1.state}} 
+        </li>
+        <div class="order_list_details">
+            {% for item2 in item1.in_order.all %}
+                <li>{{item2.item }} <a class="my_orders_toppings"> {{item2.selected_toppings}} </a></li>
+            {% endfor %}
+        </div>
+    {% endfor %} 
+{% endif %}
+    <br>
+    <a href="{% url 'index' %}">Back to Menu</a>
+    
+{% endblock %}
+
+
+
+
+

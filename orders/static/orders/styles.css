@@ -1,0 +1,579 @@
+body {
+    font-family: sans-serif;
+    background-color:#9ca29e;
+}
+body:hover {
+    cursor: default;
+}
+
+#body-page {
+    background-color:#239346;
+}
+
+#main-header {
+    text-align:center;
+}
+
+#message {
+    text-align:center;
+}
+/* Index */
+
+.index_toppings {
+    text-align: center;
+    font-size: 20px;
+    margin:2px;
+}
+
+/* Navigation menu */
+
+.topnav {
+  background-color: #07752a;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #2f563c;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#login-info {
+    text-align: right;
+    list-style: none;
+    margin-top: -40px;
+    margin-right: 15px;
+}
+
+.login {
+    text-align: right;
+    padding:10px;
+}
+
+.login_field {
+    height: 20px;
+}
+
+.login_btn {
+    height: 26px;
+    cursor: pointer;
+}
+
+.registration {
+    display:block;
+    padding: 10px;
+    font-size: 16px;
+    width: 20vw;
+    margin : 0 auto 20px;
+}
+#registration_modal {
+    width:40%;
+    padding:10px;
+}
+
+#index-register-container {
+    text-align:center;
+}
+
+/* Items menu */
+
+.food_type_header {
+    text-align:center;
+}
+
+.menu_table {
+    width:100%;
+    padding-left:5%;
+    padding-right:5%;
+    border-spacing:0;
+    font-size:20px;
+}
+
+.menu_table td {
+    width:30%;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment {
+    font-size:12px;
+    font-style: italic;
+    color: darkred;
+}
+
+.items_for_cart:hover, .items_for_cart_index:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.items_for_cart:hover > .buy_it, .items_for_cart_index:hover > .buy_it {
+    transform: scale(1.2);
+}
+
+.items_for_cart, .items_for_cart_index {
+    padding:10px;
+    text-align: center;
+}
+
+.menu_table:hover {
+   cursor: default;
+}
+
+.table_name td {
+    padding-bottom:20px;
+    text-align: center;
+}
+
+.buy_it {
+    width:20px;
+    margin-bottom: -5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* The Modal (background) 3rd party*/
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: transparent;
+  padding-top: 50px;
+}
+
+/* The Close Modal Button */
+
+.close {
+  position: absolute;
+  right: 45px;
+  top: 45px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 3% auto 20% auto; /* 3% from the top, 20% from the bottom and centered */
+  border: 1px solid #888;
+  border-radius: 5px;
+}
+
+/* Shopping cart window */
+
+#shopping-cart-modal {
+    width:70%;
+}
+
+#shopping-cart {
+    display:none;
+}
+
+#pizza-topping-selection {
+    display:none; 
+}
+
+.shopping_cart_buttons {
+    text-align:right;
+}
+
+.shopping_cart_area h3 {
+    padding: 5px;
+    padding-left:15px;
+}
+
+#shopping_cart_content {
+    padding: 5px;
+    padding-left:15px;
+}
+
+.remove_img {
+    width: 35%;
+    margin:-10%;
+    cursor: pointer;
+}
+
+#cart_col_1 {
+    width: 5%;
+    height: 40px;
+}
+
+#cart_col_2 {
+    width: 75%;
+    padding: 10px;
+}
+
+#cart_col_3 {
+    width: 20%;
+}
+
+.single_item:hover {
+    background-color:#c1b4b4;
+}
+
+#total_price {
+    text-align:right;
+    padding: 10px;
+    font-weight:bold;
+}
+.shopping_cart_buttons{
+    padding:10px;
+}
+
+/* Shopping cart icon */
+
+.shopping_cart_btn_area{
+    position:fixed;
+    margin-left: 93%;
+}
+
+#shopping_cart_btn {
+    width:45px;
+    height:45px;
+    padding:10px;
+    border-radius: 40%;
+    padding:5px;
+    margin-top:10px;
+}
+
+#shopping_cart_btn:hover {
+    cursor: pointer;
+}
+
+#shopping_cart_btn_counter:hover {
+    cursor: pointer;
+}
+
+#shopping_cart_btn_counter {
+   margin: 5px;
+   margin-top:-55px;
+   margin-right:10px;
+   color:white;
+   background:red;
+   border-radius: 50%;
+   width:20px;
+   position:relative;
+   text-align: center;
+}
+
+/* Toppings */
+
+.extra_cheese {
+    font-size:12px;
+    color:darkred;
+    position: absolute;
+    margin-left:12%;
+}
+
+#pizza-topping-selection-modal {
+   width:35%; 
+}
+
+#pizza-topping-selection-modal label:hover {
+   cursor:pointer;
+}
+
+#pizza-topping-selection-modal input:cecked + p {
+   font-weight:bold;
+}
+
+#pizza-topping-selection_content {
+    padding-left:30%;
+    padding-right:20%;
+    list-style: none;
+    width:200px;
+}
+
+.pizza-topping-selection_buttons {
+    text-align:center;
+    padding: 10px;
+}
+
+.bold_it {
+   font-weight:bold;    
+}
+
+.show_toppings {
+    font-size: 12px;
+    font-style: italic;
+    padding: 0px;
+    margin:0px;
+    color: red;
+}
+
+.disabled {
+    color:grey;
+}
+
+#toppings_comment{
+    font-size: 12px;
+    color: red;
+}
+
+/* Payment window */
+
+#payment {
+    display:none;
+}
+
+#payment-modal {
+    
+    height:30%;
+    width:50%;
+    text-align:center;
+    padding-top:10%;
+}
+
+#success {
+    display:none;
+    margin:10px;
+}
+
+/* Animations */
+
+.pop {
+  animation: pop 0.3s linear 1;
+}
+
+@keyframes pop {
+  50%  {transform: scale(1.2);}
+}
+
+.shrink{
+  animation: shrink 0.3s linear 1;
+}
+
+@keyframes shrink {
+  50%  {transform: scale(0.8);}
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+  margin-left: 40%;
+  display:none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Orders list*/
+
+.order_list {
+    cursor:pointer;
+    list-style: none;
+    margin-left: 20px;
+    padding:10px;
+    font-style:italic;
+}
+
+.order_list:hover {
+    background-color:#c1b4b4;
+    font-style:italic;
+}
+
+.order_list_details {
+    margin-left: 40px;
+    display:none;
+}
+
+.my_orders_toppings {
+    font-size: 12px;
+    color:darkred;
+    font-style: italic;
+}
+
+.no_orders {
+    padding:10px;
+}
+
+/* Check and Cross animations 3rd party */
+
+.circle-loader {
+  margin: 0 0 30px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-left-color: #5cb85c;
+  animation-name: loader-spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: content-box;
+}
+
+.circle-loader,
+.circle-loader:after {
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
+}
+
+.load-complete {
+  -webkit-animation: none;
+  animation: none;
+  border-color: #5cb85c;
+  transition: border 500ms ease-out;
+}
+
+.load-error {
+  -webkit-animation: none;
+  animation: none;
+  border-color: red;
+  transition: border 500ms ease-out;
+}
+
+.checkmark {
+  display: none;
+  box-sizing: content-box;
+}
+.checkmark.draw:after {
+  opacity: 1;
+  height: 4em;
+  width: 2em;
+  transform-origin: left top;
+  border-right: 2px solid #5cb85c;
+  border-top: 2px solid #5cb85c;
+  content: '';
+  left: 2em;
+  top: 4em;
+  position: absolute;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+  animation-name: checkmark;
+  transform: scaleX(-1) rotate(135deg);
+}
+.checkmark.error {
+  position: absolute;
+  left: 2em;
+  top: 2em;
+  width: 4em;
+  height: 4em;
+}
+.checkmark.error:before, .checkmark.error:after {
+  position: absolute;
+  content: ' ';
+  height: 4em;
+  width: 2px;
+  background-color: #f00;
+}
+.checkmark.error:before {
+  transform: rotate(45deg);
+}
+.checkmark.error:after {
+  transform: rotate(-45deg);
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 2em;
+    opacity: 1;
+  }
+  40% {
+    height: 4em;
+    width: 2em;
+    opacity: 1;
+  }
+  100% {
+    height: 4em;
+    width: 2em;
+    opacity: 1;
+  }
+}
+
+/* A little of responsiveness */
+
+@media screen and (max-width: 1100px) {
+    
+    .shopping_cart_btn_area {
+        position:fixed;
+        margin-left: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    
+    .shopping_cart_btn_area {
+        position:fixed;
+        margin-left: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    
+    #login-info {
+        text-align: left;
+        list-style: none;
+        font-weight: bold;
+        margin-top: 0px;
+        margin-right: 0px;
+        padding:10px;
+    }
+    
+    .login_field {
+        display:block;
+        width:100%;
+        height: 20px;
+        margin: 5px;
+    }
+    
+    .textfield {
+        border-left-width: 0px;
+        border-right-width: 0px;
+    }
+}

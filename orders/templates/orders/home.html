@@ -1,0 +1,137 @@
+{% extends "orders/base.html" %}
+
+
+{% block body %}
+
+    <div class="shopping_cart_btn_area" align="right">
+        <img id="shopping_cart_btn" src="/static/orders/images/shopping_cart.png" alt="Shopping Cart">
+        <div id="shopping_cart_btn_counter"></div>
+    </div>
+    
+<h1>Pinocchio's Pizza & Subs</h1>
+
+    <h1>Menu</h1>
+
+    {% regroup menu by food_type as menugrouped %}
+    
+    {% for type in menugrouped %}
+        
+        <h2 class=food_type_header>{{type.grouper}} </h2>
+
+        <table class=menu_table>
+            {% if  type.grouper|stringformat:"s" in "Pasta Salads" %}  
+                <tr class=table_name>
+                <td></td>
+                <td>Regular</td>
+                </tr> 
+            {% else %}
+                <tr class=table_name>
+                <td></td>
+                <td>Small</td>
+                <td>Large</td>
+                </tr> 
+            {% endif %}
+         
+        {% if type.grouper|stringformat:"s" in "Subs Pasta Salads 'Dinner Platters'" %}
+            {% regroup type.list|dictsortreversed:"priority" by name as toppingsdmenu %}
+        {% else %}
+            {% regroup type.list by toppings_type as toppingsdmenu %}
+        {% endif %}
+
+        {% for itemz in toppingsdmenu %}
+        
+            <tr>       
+            {% for item in itemz.list %}
+                {% if "Small" == item.size|stringformat:"s" %}
+                
+                    <td>{{item.name}} <a class="comment">{{item.comment}}</a></td>
+                   
+                    <td class="items_for_cart" data-name="{{item}}" data-toppings="{{item.number_of_toppings}}"
+                        data-price="{{item.price}}" data-is_special="{{item.is_special}}" id="{{item.id}}">
+                        {{item.price}} 
+                        <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                    </td>
+                
+                {% endif %} 
+                
+                {% if "Large" == item.size|stringformat:"s" %}
+                    <td class="items_for_cart" data-name="{{item}}" data-toppings="{{item.number_of_toppings}}" 
+                        data-price="{{item.price}}" data-is_special="{{item.is_special}}" id="{{item.id}}"> 
+                        {{item.price}} 
+                        <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                    </td>
+                {% endif %}
+                
+                {% if "Regular" == item.size|stringformat:"s" %}
+                    
+                    <td>{{item.name}} <a class="comment">{{item.comment}}</a></td>
+                        <td colspan="2" class="items_for_cart" data-name="{{item}}" 
+                            data-toppings="{{item.number_of_toppings}}" data-price="{{item.price}}" 
+                            data-is_special="{{item.is_special}}" id="{{item.id}}"> 
+                            {{item.price}} 
+                            <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                        </td>
+                    
+                {% endif %} 
+            {% endfor %} 
+            </tr>
+        {% endfor %}
+        </table>
+        <br><br><br>
+    {% endfor %}
+    
+    
+    <div id="shopping-cart" class="modal">
+      <span onclick="document.getElementById('shopping-cart').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="shopping-cart-modal" method="post">
+        <div class="container" id="shopping-cart-container">
+            <h1>Shopping Cart</h1>
+            <div class="shopping_cart_area">
+                <h3>Your order: </h3>
+                 <div id=shopping_cart_content></div>
+            </div>
+
+          <div class="shopping_cart_buttons">
+            <button type="button" class="cancelbtn">Continue shopping</button>
+            <button type="button" class="pay_btn">Pay</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+     <div id="pizza-topping-selection" class="modal">
+      <span id="close_toppings_modal_btn" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="pizza-topping-selection-modal" method="post">
+        <div class="container" id="pizza-topping-selection-container">
+            <h1>Available toppings:</h1>
+            <div class="pizza-topping-selection_area">
+                <div id=pizza-topping-selection_content>
+                    
+                    <p id="toppings_comment">+0.50 $ per additonal topping</p>
+                    {% for item in toppings %}
+                        <label class="single_topping {{item.group}}" data-group="{{item.group}}">
+                        <input type="checkbox" name="{{item}}" value="{{item}}"> {{item}}<br></label>
+                    {% endfor %} 
+                     
+                </div>
+                    <div class="pizza-topping-selection_buttons">
+                        <button type="button" class="select_topping_btn">Add to cart</button>
+                    </div> 
+            </div>
+        </div>
+      </form>
+    </div>
+    
+    <div id="payment" class="modal">
+      <span id="close_payment_btn" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" id="payment-modal" method="post">
+        <div class="container" id="payment-container">
+            <div id=success></div>
+            <div class="circle-loader">
+                <div class="checkmark draw"></div>
+            </div>
+        </div>
+        </form>
+    </div>
+    
+{% endblock %}

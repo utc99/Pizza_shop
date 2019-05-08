@@ -1,0 +1,139 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+{% if message %}
+    <div id="message">
+        {{ message }}
+    </div>
+{% endif %}
+    <div class="login">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input class="login_field textfield" name="username" type="text" placeholder="Username"/>
+            <input class="login_field textfield" name="password" type="password" placeholder="Password"/>
+            <input class="login_field login_btn" type="submit" value="Login"/>
+            <button class="login_field login_btn" id="goto_reg_btn" type="button">Register</button>
+        </form>
+    </div>    
+    <h1>Pinocchio's Pizza & Subs</h1>
+    
+    <h1>Menu</h1>
+
+    {% regroup menu by food_type as menugrouped %}
+    
+    {% for type in menugrouped %}
+        
+        <h2 class=food_type_header>{{type.grouper}} </h2>
+
+        <table class=menu_table>
+            {% if  type.grouper|stringformat:"s" in "Pasta Salads" %}  
+                <tr class=table_name>
+                    <td></td>
+                    <td>Regular</td>
+                </tr> 
+            {% else %}
+                <tr class=table_name>
+                    <td></td>
+                    <td>Small</td>
+                    <td>Large</td>
+                </tr> 
+            {% endif %}
+         
+        {% if type.grouper|stringformat:"s" in "Subs Pasta Salads 'Dinner Platters'" %}
+            {% regroup type.list|dictsortreversed:"priority" by name as menu_items %}
+        {% else %}
+            {% regroup type.list by toppings_type as menu_items %}
+        {% endif %}
+
+        {% for itemz in menu_items %}
+        
+            <tr>       
+            {% for item in itemz.list %}
+                {% if "Small" == item.size|stringformat:"s" %}
+                
+                    <td>{{item.name}} <a class="comment">{{item.comment}}</a></td>
+                   
+                    <td class="items_for_cart" data-name="{{item}}" data-toppings="{{item.number_of_toppings}}"
+                        data-price="{{item.price}}" data-is_special="{{item.is_special}}" id="{{item.id}}">
+                        {{item.price}} 
+                        <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                    </td>
+                
+                {% endif %} 
+                
+                {% if "Large" == item.size|stringformat:"s" %}
+                    <td class="items_for_cart" data-name="{{item}}" data-toppings="{{item.number_of_toppings}}" 
+                        data-price="{{item.price}}" data-is_special="{{item.is_special}}" id="{{item.id}}"> 
+                        {{item.price}} 
+                        <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                    </td>
+                {% endif %}
+                
+                {% if "Regular" == item.size|stringformat:"s" %}
+                    
+                    <td>{{item.name}} <a class="comment">{{item.comment}}</a></td>
+                    <td colspan="2" class="items_for_cart" data-name="{{item}}" 
+                        data-toppings="{{item.number_of_toppings}}" data-price="{{item.price}}" 
+                        data-is_special="{{item.is_special}}" id="{{item.id}}"> 
+                        {{item.price}} 
+                        <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+                    </td>
+                    
+                {% endif %} 
+            {% endfor %}
+    
+            </tr>
+        {% endfor %}
+        
+        {% if  type.grouper|stringformat:"s" in "Subs" %}
+            <td>Extra Cheese on any sub </td>
+            <td colspan="2" class="items_for_cart"> 
+                +0.50
+                <img class="buy_it" src="/static/orders/images/shopping_cart2.png" alt="Buy it">
+            </td>
+        {% endif %}
+        
+        </table>
+        <br><br><br>
+        
+        {% if  type.grouper|stringformat:"s" in "Sicilian Pizza" %}
+            <h1>Toppings</h1>
+            {% for topping in toppings %}
+                <p class="index_toppings"> {{ topping }}</p>
+            {% endfor %}  
+        {% endif %}
+        
+    {% endfor %}
+ 
+    
+    <div id="index-register-form" class="modal">
+        <span onclick="document.getElementById('index-register-form').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" id="registration_modal" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="container" id="index-register-container">
+                <h1 id="index-register-h1" >Register</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+    
+                <label for="first_name"><b>First name</b></label>
+                    <input class=registration name="first_name" type="text" placeholder="First name"/>
+                <label for="last_name"><b>Last name</b></label>
+                    <input class=registration name="last_name" type="text"placeholder="Last name"/>
+                <label for="email"><b>Email</b></label>
+                    <input class=registration name="email" type="text"placeholder="Email"/>
+                <label for="username"><b>Username</b></label>
+                    <input class=registration name="username" type="text"placeholder="Username"/>
+                <label for="password1"><b>Password</b></label>
+                    <input class=registration name="password1" type="password"placeholder="Password"/>
+                <label for="password2"><b>Repeat password</b></label>
+                    <input class=registration name="password2" type="password"placeholder="Repeat the password"/>
+    
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('index-register-form').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="submit" class="signupbtn">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+{% endblock %}

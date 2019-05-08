@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static '/orders/styles.css' %}"/>
+
+        <script src="{% static '/orders/jquery-3.4.0.min.js' %}"></script>
+        <script src="{% static '/orders/scripts.js' %}"></script>
+    </head>
+    <body>
+        <div id=top-page>
+            {% if user.is_authenticated %}
+            
+            <div class="topnav">
+                <a href="{% url 'index' %}">Menu</a>
+                <a href="{% url 'myorders' %}">Orders</a>
+            </div>
+            <ul id=login-info>
+                <li>Currently logged in as: {{ user.email }}</li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+            {% endif %}
+        </div>
+
+        <div id=body-page>
+            {% block body %}
+            {% endblock %}
+    </body>
+</html>
