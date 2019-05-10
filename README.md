@@ -2,73 +2,15 @@
 
 Web Programming with Python and JavaScript
 
+Requirements
+Alright, it’s time to actually build your web application! Here are the requirements:
+
+Menu: Your web application should support all of the available menu items for Pinnochio’s Pizza & Subs (a popular pizza place in Cambridge). It’s up to you, based on analyzing the menu and the various types of possible ordered items (small vs. large, toppings, additions, etc.) to decide how to construct your models to best represent the information. Add your models to orders/models.py, make the necessary migration files, and apply those migrations.
+Adding Items: Using Django Admin, site administrators (restaurant owners) should be able to add, update, and remove items on the menu. Add all of the items from the Pinnochio’s menu into your database using either the Admin UI or by running Python commands in Django’s shell.
+Registration, Login, Logout: Site users (customers) should be able to register for your web application with a username, password, first name, last name, and email address. Customers should then be able to log in and log out of your website.
+Shopping Cart: Once logged in, users should see a representation of the restaurant’s menu, where they can add items (along with toppings or extras, if appropriate) to their virtual “shopping cart.” The contents of the shopping should be saved even if a user closes the window, or logs out and logs back in again.
+Placing an Order: Once there is at least one item in a user’s shopping cart, they should be able to place an order, whereby the user is asked to confirm the items in the shopping cart, and the total (no need to worry about tax!) before placing an order.
+Viewing Orders: Site administrators should have access to a page where they can view any orders that have already been placed.
 
 
-
-user
-{% extends "orders/base.html" %}
-
-{% block body %}
-<h1>LOGGED IN Hello, {{ user.first_name }}</h1>
-<ul>
-    <li>Currently logged in as: {{ user.username }}</li>
-    <li><a href="{% url 'logout' %}">Logout</a></li>
-</ul>
-
-<table style="width:100%">
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td> 
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td> 
-    <td>94</td>
-  </tr>
-</table>
-
-    <h1>Menu1</h1>
-   <!-- {% regroup menu|dictsort:"price"|dictsortreversed:"menu_priority" by food_type as menugrouped %} -->
-    {% regroup menu|dictsort:"price" by food_type as menugrouped %}
-
-    {% for type in menugrouped %}
-    <li>{{menugrouped}}</li>
-        {% if "Regular" == type.grouper|stringformat:"s" or "Sicilian" == type.grouper|stringformat:"s"%}
-            <h2 id=food_type_header>{{type.grouper}} Pizza</h2>
-        {% endif %} 
-        {% if "Regular" != type.grouper|stringformat:"s" and "Sicilian" != type.grouper|stringformat:"s"%}
-            <h2 id=food_type_header>{{type.grouper}} </h2>
-        {% endif %} 
-        
-        <table style="width:100%">
-        
-      {% regroup type.list by toppings_type as toppingsdmenu %} 
-      
-  {% for item in toppingsdmenu %}
-       <tr>       
-       {% for item in item.list %}
-            
-            {% if "Large" != item.size|stringformat:"s" %}
-                <td>{{item.toppings_type}}</td>
-                <td>{{item.price}}</td>
-            {% endif %} 
-            
-            {% if "Large" == item.size|stringformat:"s" %}
-                <td>{{item.price}}</td>
-            {% endif %}
-        {% endfor %} 
-        </tr>
-  {% endfor %}
-  
-        </table>
-  
- <!--       {% for item in type.list|dictsort:"price" %}
-        {{item.toppings}}
-            <li>
-                {{item}}
-            </li>
-        {% endfor %}
--->        
-    {% endfor %}
-{% endblock %}
+User can do all what's required. Admin can see and add/change all items trough admin portal. Additionaly shopping cart content is saved in a session, so it's there after page refresh.
