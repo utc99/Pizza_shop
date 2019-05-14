@@ -14,7 +14,7 @@ class Single_Order_Item(models.Model):
     selected_toppings = models.CharField(max_length=128, default="None")
     
     def __str__(self):
-        return f"{self.order} - {self.item} - {self.selected_toppings}"            
+        return f"{self.order} - {self.item} - {self.selected_toppings}"
 
 
 class Size(models.Model):
