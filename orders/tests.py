@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 from .models import Menu, Size, Order, FoodType, PizzaToppingsTypes, MenuPriority, Order_State, PizzaToppings, Single_Order_Item
-#from .models import Airport, Flight, Passenger
 
 # Create your tests here.
 class MenuTestCase(TestCase):
